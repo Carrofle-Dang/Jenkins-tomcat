@@ -6,7 +6,7 @@ plugins {
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '17' // Java 11 기준 (Gradle 7.0 기본 대응)
+sourceCompatibility = '21' // Java 11 기준 (Gradle 7.0 기본 대응)
 apply plugin : 'war'
 
 repositories {
