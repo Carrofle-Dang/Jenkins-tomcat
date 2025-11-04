@@ -1,13 +1,64 @@
 pipeline {
   agent any
+<<<<<<< HEAD
   tools {
     maven 'Maven3'   // µî·ÏÇÑ ÀÌ¸§
     // jdk 'JDK17'  // JDKµµ µî·ÏÇß´Ù¸é »ç¿ë
+=======
+  tools { maven 'maven3' }   // Global Toolì— ë“±ë¡í•œ ì´ë¦„
+  options { timestamps() }
+
+  environment {
+    APP_NAME   = 'login-app'
+    TOMCAT_URL = 'http://192.168.0.186:80'
+    CRED_ID    = 'tomcat-deploy'
+>>>>>>> dd4213c952602bd85d806aed01d5f167ca2ec5a1
   }
+
   stages {
+<<<<<<< HEAD
     stage('Checkout'){ steps { checkout scm } }
     stage('Build'){
       steps { sh 'mvn -B clean package -DskipTests' }
     }
   }
 }
+=======
+    stage('Checkout') {
+      steps { checkout scm }
+    }
+
+    stage('Build WAR') {
+      steps {
+        dir('login-app') {
+          sh 'mvn -B clean package -DskipTests'
+          stash includes: 'target/*.war', name: 'war'
+        }
+      }
+      post {
+        success {
+          archiveArtifacts artifacts: 'login-app/target/*.war', fingerprint: true
+        }
+      }
+    }
+
+    stage('Deploy to Tomcat (Manager API)') {
+      steps {
+        unstash 'war'
+        withCredentials([usernamePassword(credentialsId: "${CRED_ID}", usernameVariable: 'USER', passwordVariable: 'PASS')]) {
+          sh """
+            curl -sf -u "$USER:$PASS" "${TOMCAT_URL}/manager/text/undeploy?path=/${APP_NAME}" || true
+            curl -sf -u "$USER:$PASS" \
+              -T login-app/target/${APP_NAME}.war \
+              "${TOMCAT_URL}/manager/text/deploy?path=/${APP_NAME}&update=true"
+          """
+        }
+      }
+    }
+  }
+
+  post {
+    success { echo "ë°°í¬ ì™„ë£Œ: ${TOMCAT_URL}/${APP_NAME}/" }
+  }
+}
+>>>>>>> dd4213c952602bd85d806aed01d5f167ca2ec5a1
