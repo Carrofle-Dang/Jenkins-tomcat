@@ -6,8 +6,9 @@ pipeline {
   }
   stages {
     stage('Checkout'){ steps { checkout scm } }
-    stage('Build'){
-      steps { sh 'mvn -B clean package -DskipTests' }
-    }
+    dir('login-app') {   
+          sh 'chmod +x mvnw || true'
+          sh './mvnw -B clean package -DskipTests'  
+        }
   }
 }
