@@ -3,7 +3,6 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <!-- ✅ Boot가 플러그인/의존성 버전을 관리 -->
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
@@ -75,7 +74,7 @@
   <build>
     <finalName>login-app</finalName>
     <plugins>
-      <!-- ✅ 버전 명시 불필요 (parent가 관리) -->
+   
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
