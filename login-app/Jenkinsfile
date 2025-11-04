@@ -1,37 +1,27 @@
 pipeline {
-  agent any
-<<<<<<< HEAD
-  tools {
-    maven 'Maven3'   // ����� �̸�
-    // jdk 'JDK17'  // JDK�� ����ߴٸ� ���
-=======
-  tools { maven 'maven3' }   // Global Tool에 등록한 이름
+  agent any 
+  tools { maven 'maven3' }   // Global Toolì— ë“±ë¡í•œ ì´ë¦„
   options { timestamps() }
 
   environment {
     APP_NAME   = 'login-app'
     TOMCAT_URL = 'http://192.168.0.186:80'
     CRED_ID    = 'tomcat-deploy'
->>>>>>> dd4213c952602bd85d806aed01d5f167ca2ec5a1
   }
 
   stages {
-<<<<<<< HEAD
-    stage('Checkout'){ steps { checkout scm } }
-    stage('Build'){
-      steps { sh 'mvn -B clean package -DskipTests' }
-    }
-  }
-}
-=======
     stage('Checkout') {
-      steps { checkout scm }
+      steps {
+        checkout scm
+      }
     }
 
     stage('Build WAR') {
       steps {
-        dir('login-app') {
-          sh 'mvn -B clean package -DskipTests'
+        dir('login-app') {          
+          sh 'ls -al'             
+          sh 'chmod +x mvnw || true'
+          sh './mvnw -B clean package -DskipTests'
           stash includes: 'target/*.war', name: 'war'
         }
       }
@@ -59,6 +49,6 @@ pipeline {
 
   post {
     success { echo "배포 완료: ${TOMCAT_URL}/${APP_NAME}/" }
+    failure { echo "빌드/배포 실패" }
   }
 }
->>>>>>> dd4213c952602bd85d806aed01d5f167ca2ec5a1
