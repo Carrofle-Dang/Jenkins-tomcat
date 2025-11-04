@@ -9,19 +9,15 @@ pipeline {
     CRED_ID    = 'tomcat-deploy'
   }
 
-  stages {
+ stages {
     stage('Checkout') {
-      steps {
-        checkout scm
-      }
+      steps { checkout scm }
     }
 
     stage('Build WAR') {
       steps {
-        dir('login-app') {          
-          sh 'ls -al'             
-          sh 'chmod +x mvnw || true'
-          sh './mvnw -B clean package -DskipTests'
+        dir('login-app') {
+          sh 'mvn -B clean package -DskipTests'
           stash includes: 'target/*.war', name: 'war'
         }
       }
@@ -49,6 +45,5 @@ pipeline {
 
   post {
     success { echo "배포 완료: ${TOMCAT_URL}/${APP_NAME}/" }
-    failure { echo "빌드/배포 실패" }
   }
 }
