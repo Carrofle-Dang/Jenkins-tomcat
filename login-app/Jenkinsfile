@@ -6,7 +6,7 @@ pipeline {
   environment {
     APP_NAME   = 'login-app'
     TOMCAT_URL = 'http://192.168.0.10:80'
-    CRED_ID    = 'tomcat-deployer'
+    CRED_ID    = 'tomcat-deploy'
   }
 
   stages {
