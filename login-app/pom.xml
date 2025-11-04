@@ -30,7 +30,12 @@
       <artifactId>spring-boot-starter-security</artifactId>
       <version>${spring.boot.version}</version>
     </dependency>
-
+<dependency>
+  <groupId>org.projectlombok</groupId>
+  <artifactId>lombok</artifactId>
+  <version>1.18.32</version>
+  <scope>provided</scope>
+</dependency>
     <!-- 외부 Tomcat에 배포: 내장 톰캣 provided -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
