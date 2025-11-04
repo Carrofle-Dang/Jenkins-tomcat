@@ -1,103 +1,27 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+package com.example.login.dto;
 
-  <parent>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.2.0</version>
-    <relativePath/> <!-- repo 밖 parent를 쓰지 않음 -->
-  </parent>
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.Setter;
 
-  <groupId>com.example</groupId>
-  <artifactId>login-app</artifactId>
-  <version>1.0.0</version>
-  <packaging>war</packaging>
+@Getter @Setter
+public class RegisterRequest {
 
-  <properties>
-    <java.version>17</java.version>
-  </properties>
+    @NotBlank
+    @Size(min = 3, max = 50)
+    private String username;
 
-  <dependencies>
-    <!-- 필요한 스타터들 (생략 없이 그대로 두세요) -->
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-web</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-thymeleaf</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-security</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-data-jpa</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-validation</artifactId>
-    </dependency>
+    @NotBlank
+    @Size(min = 6, max = 100)
+    private String password;
 
-    <!-- DB -->
-    <dependency>
-      <groupId>com.mysql</groupId>
-      <artifactId>mysql-connector-j</artifactId>
-      <version>8.0.33</version>
-    </dependency>
+    @NotBlank
+    @Size(min = 6, max = 100)
+    private String confirmPassword;
 
-    <!-- 외부 톰캣 배포 -->
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-tomcat</artifactId>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>jakarta.servlet</groupId>
-      <artifactId>jakarta.servlet-api</artifactId>
-      <version>6.0.0</version>
-      <scope>provided</scope>
-    </dependency>
-
-    <!-- Lombok (선택) -->
-    <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-      <version>1.18.32</version>
-      <scope>provided</scope>
-    </dependency>
-  </dependencies>
-
-  <build>
-    <finalName>login-app</finalName>
-    <plugins>
-   
-      <plugin>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-maven-plugin</artifactId>
-      </plugin>
-
-      <!-- 컴파일러(원하면 버전 명시 가능) -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <release>17</release>
-        </configuration>
-      </plugin>
-
-      <!-- war 플러그인(버전 명시해도/안해도 OK) -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-war-plugin</artifactId>
-        <version>3.4.0</version>
-        <configuration>
-          <failOnMissingWebXml>false</failOnMissingWebXml>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
-</project>
+    @Email
+    @NotBlank
+    private String email;
+}
