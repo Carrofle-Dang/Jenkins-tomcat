@@ -1,11 +1,11 @@
 pipeline {
   agent any 
-  tools { maven 'maven3' }   // Global Toolì— ë“±ë¡í•œ ì´ë¦„
+  tools { maven 'maven3' }  
   options { timestamps() }
 
   environment {
     APP_NAME   = 'login-app'
-    TOMCAT_URL = 'http://192.168.0.186:80'
+    TOMCAT_URL = 'http://192.168.0.10:80'
     CRED_ID    = 'tomcat-deploy'
   }
 
