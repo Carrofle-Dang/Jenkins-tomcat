@@ -5,8 +5,8 @@ pipeline {
 
   environment {
     APP_NAME   = 'login-app'
-    TOMCAT_URL-1 = 'http://192.168.0.15:9000'
-    TOMCAT_URL-2 = 'http://192.168.0.16:9000'
+    TOMCAT_URL_1 = 'http://192.168.0.15:9000'
+    TOMCAT_URL_2 = 'http://192.168.0.16:9000'
     CRED_ID    = 'tomcat-deploy'
   }
 
