@@ -6,7 +6,7 @@ pipeline {
   environment {
     APP_NAME   = 'login-app'
     TOMCAT_URL-1 = 'http://192.168.0.15:9000'
-    TOMCAT_URL-2 = 'http://192.168.0.15:9000'
+    TOMCAT_URL-2 = 'http://192.168.0.16:9000'
     CRED_ID    = 'tomcat-deploy'
   }
 
@@ -39,10 +39,10 @@ pipeline {
               -T login-app/target/${APP_NAME}.war \
               "${TOMCAT_URL-1}/manager/text/deploy?path=/${APP_NAME}&update=true"
 
-              curl -sf -u "$USER:$PASS" "${TOMCAT_URL-1}/manager/text/undeploy?path=/${APP_NAME}" || true
+              curl -sf -u "$USER:$PASS" "${TOMCAT_URL-2}/manager/text/undeploy?path=/${APP_NAME}" || true
             curl -sf -u "$USER:$PASS" \
               -T login-app/target/${APP_NAME}.war \
-              "${TOMCAT_URL-1}/manager/text/deploy?path=/${APP_NAME}&update=true"
+              "${TOMCAT_URL-2}/manager/text/deploy?path=/${APP_NAME}&update=true"
           """
         }
       }
